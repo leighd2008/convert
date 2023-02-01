@@ -1,6 +1,6 @@
 const electron = require('electron');
 
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, ipcMain } = electron;
 
 let mainWindow;
 
@@ -17,6 +17,10 @@ app.on('ready', () => {
     }
   }),
   mainWindow.loadURL(`file://${__dirname}/src/index.html`);
+});
+
+ipcMain.on('videos:added', (event, videos) => {
+  console.log(videos);
 });
 
 module.exports = mainWindow;
